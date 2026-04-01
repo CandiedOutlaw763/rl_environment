@@ -4,3 +4,4 @@ pandas-ta
 yfinance
 pydantic
 python-dotenv
+openenv-core

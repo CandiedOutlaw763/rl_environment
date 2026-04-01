@@ -1,5 +1,5 @@
 # Use an official, lightweight Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,8 +11,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the project files into the container
-# (This includes your /data folder with the CSVs, so it won't crash!)
 COPY . .
 
-# Run the inference script when the container launches
-CMD ["python", "inference.py"]
+# ... (Keep the Python 3.12 and pip install steps the same) ...
+
+# Expose the standard Hugging Face Space port
+EXPOSE 7860
+
+# Run the server application directly
+CMD ["python", "server/app.py"]

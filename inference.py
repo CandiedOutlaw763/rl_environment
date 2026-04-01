@@ -14,13 +14,15 @@ from env import DayTraderEnv
 load_dotenv()
 
 # 1. Setup OpenAI Client (Routed to Groq's Servers)
-api_key = os.getenv("GROQ_API_KEY")
+api_base_url = os.getenv("API_BASE_URL")
+model_name = os.getenv("MODEL_NAME")
+api_key = os.getenv("HF_TOKEN")
 if not api_key:
     raise ValueError("Please set your GROQ_API_KEY in the .env file.")
 
 client = OpenAI(
     api_key=api_key,
-    base_url="https://api.groq.com/openai/v1"
+    base_url=api_base_url
 )
 
 # 2. Load the Static Datasets
@@ -64,7 +66,7 @@ def get_agent_action(observation_json: str) -> Action:
     
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile", # Meta's lightning-fast Llama 3 model
+            model=model_name, # Meta's lightning-fast Llama 3 model
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": system_prompt},
