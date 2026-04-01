@@ -1,0 +1,26 @@
+name: "LlamaTrader: Algorithmic Daytrading Simulator"
+version: "1.0.0"
+description: "A high-fidelity, OpenEnv-compliant algorithmic daytrading simulator using historical 5-minute META stock data and technical indicators."
+author: "Siddha Narayan Patra"
+license: "MIT"
+
+environment:
+  observation_space: "Observation (Pydantic Model: cash, shares, price, ema_20, rsi_14, macd_histogram, bb_lower, bb_upper, vwap)"
+  action_space: "Action (Pydantic Model: action_type [buy/sell/hold], percentage [0.0-1.0])"
+  reward_space: "Reward (Pydantic Model: step_reward, nav_change)"
+
+tasks:
+  - id: "capital_preservation"
+    name: "Capital Preservation"
+    difficulty: "easy"
+    description: "Survive a highly volatile, sideways market day without suffering a drawdown of 2% or more."
+    
+  - id: "bear_market_navigation"
+    name: "Bear Market Navigation"
+    difficulty: "medium"
+    description: "Recognize a severe market crash and liquidate to cash to protect capital better than a buy-and-hold strategy."
+
+  - id: "alpha_generation"
+    name: "Alpha Generation"
+    difficulty: "hard"
+    description: "Actively trade to beat a standard buy-and-hold strategy by at least 2% during a massive intraday bull rally."
